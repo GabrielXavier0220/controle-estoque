@@ -1,0 +1,48 @@
+# ===========================
+# BACKEND (Spring Boot / Maven)
+# ===========================
+
+# Maven
+backend/target/
+
+# Arquivos compilados
+*.class
+*.jar
+*.war
+
+# Logs
+*.log
+
+# ===========================
+# FRONTEND (React / Node.js)
+# ===========================
+
+# Dependências
+frontend/node_modules/
+
+# Build de produção
+frontend/build/
+
+# Variáveis de ambiente
+.env
+.env.local
+.env.production.local
+
+# ===========================
+# IDEs
+# ===========================
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# VSCode
+.vscode/
+
+# ===========================
+# Sistemas Operacionais
+# ===========================
+
+.DS_Store
+Thumbs.db
+*~

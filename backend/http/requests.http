@@ -1,0 +1,212 @@
+# CONTROLE DE ESTOQUE - API TESTS
+
+# 1. PRODUTOS
+
+### Criar Produto 1 - Bolo de Chocolate
+POST http://localhost:8081/products
+Content-Type: application/json
+
+{
+  "name": "Bolo de Chocolate",
+  "sku": "BOLO-CHOC-001",
+  "description": "Bolo de chocolate 1kg",
+  "quantity": 0,
+  "minQuantity": 5,
+  "costPrice": 15.00,
+  "salePrice": 35.00
+}
+
+### Criar Produto 2 - Pão Francês
+POST http://localhost:8081/products
+Content-Type: application/json
+
+{
+  "name": "Pão Francês",
+  "sku": "PAO-FR-001",
+  "description": "Pão francês tradicional",
+  "quantity": 0,
+  "minQuantity": 20,
+  "costPrice": 0.50,
+  "salePrice": 1.00
+}
+
+### Listar TODOS os produtos
+GET http://localhost:8081/products
+
+### Buscar produto por ID
+GET http://localhost:8081/products/11
+
+### Atualizar produto
+PUT http://localhost:8081/products/1
+Content-Type: application/json
+
+{
+  "name": "Bolo de Chocolate Premium",
+  "sku": "BOLO-CHOC-001",
+  "description": "Bolo de chocolate premium 1kg",
+  "quantity": 5,
+  "minQuantity": 3,
+  "costPrice": 18.00,
+  "salePrice": 40.00
+}
+
+### Deletar produto
+DELETE http://localhost:8081/products/11
+
+
+# MATÉRIAS-PRIMAS (RAW MATERIALS)
+
+
+### Criar Matéria-Prima - Farinha de Trigo
+POST http://localhost:8081/raw-materials
+Content-Type: application/json
+
+{
+  "name": "Farinha de Trigo",
+  "code": "FARINHA-001",
+  "stockQuantity": 1000
+}
+
+### Criar Matéria-Prima - Açúcar
+POST http://localhost:8081/raw-materials
+Content-Type: application/json
+
+{
+  "name": "Açúcar",
+  "code": "ACUCAR-001",
+  "stockQuantity": 500
+}
+
+### Criar Matéria-Prima - Chocolate em Pó
+POST http://localhost:8081/raw-materials
+Content-Type: application/json
+
+{
+  "name": "Chocolate em Pó",
+  "code": "CHOC-PO-001",
+  "stockQuantity": 300
+}
+
+### Criar Matéria-Prima - Ovos
+POST http://localhost:8081/raw-materials
+Content-Type: application/json
+
+{
+  "name": "Ovos",
+  "code": "OVOS-001",
+  "stockQuantity": 200
+}
+
+### Criar Matéria-Prima - Leite
+POST http://localhost:8081/raw-materials
+Content-Type: application/json
+
+{
+  "name": "Leite",
+  "code": "LEITE-001",
+  "stockQuantity": 500
+}
+
+### Listar TODAS as matérias-primas
+GET http://localhost:8081/raw-materials
+
+### Buscar matéria-prima por ID
+GET http://localhost:8081/raw-materials/1
+
+### Atualizar matéria-prima
+PUT http://localhost:8081/raw-materials/31
+Content-Type: application/json
+
+{
+  "name": "Leite",
+  "code": "LEITE-001",
+  "stockQuantity": 500
+}
+
+### Deletar matéria-prima
+DELETE http://localhost:8081/raw-materials/19
+
+
+# ASSOCIAÇÕES (PRODUCT ↔ RAW MATERIALS)
+
+### Associar Farinha ao Bolo de Chocolate
+POST http://localhost:8081/products/1/raw-materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": 1,
+  "requiredQuantity": 500
+}
+
+### Associar Açúcar ao Bolo de Chocolate
+POST http://localhost:8081/products/1/raw-materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": 2,
+  "requiredQuantity": 200
+}
+
+### Associar Chocolate em Pó ao Bolo de Chocolate
+POST http://localhost:8081/products/1/raw-materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": 3,
+  "requiredQuantity": 150
+}
+
+### Associar Ovos ao Bolo de Chocolate
+POST http://localhost:8081/products/1/raw-materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": 4,
+  "requiredQuantity": 6
+}
+
+### Associar Leite ao Bolo de Chocolate
+POST http://localhost:8081/products/14/raw-materials
+Content-Type: application/json
+
+{
+  "rawMaterialId": 31,
+  "requiredQuantity": 250
+}
+
+### Listar matérias-primas do Produto
+GET http://localhost:8081/products/14/raw-materials
+
+### Atualizar quantidade necessária de uma associação específica
+PUT http://localhost:8081/product-raw-materials/1
+Content-Type: application/json
+
+{
+  "rawMaterialId": 1,
+  "requiredQuantity": 600
+}
+
+### Deletar associação pelo ID da associação
+DELETE http://localhost:8081/product-raw-materials/5
+
+### Deletar associação por produto + matéria-prima
+DELETE http://localhost:8081/products/1/raw-materials/4
+
+
+### Ver matérias-primas do produto 11
+GET http://localhost:8081/products/11/raw-materials
+
+
+
+### rawMaterialId é o id da matéria-prima relacionada ao produto
+
+# SUGESTÃO DE PRODUÇÃO
+
+### Consultar produtos que podem ser produzidos
+### Esta rota calcula automaticamente:
+### - Quais produtos podem ser feitos com o estoque atual
+### - Quantas unidades de cada produto podem ser produzidas
+### - Valor total que será obtido com a produção
+### - Prioriza produtos de MAIOR VALOR primeiro
+GET http://localhost:8081/production/suggestions
+

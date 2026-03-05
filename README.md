@@ -20,7 +20,7 @@ Sistema web completo para gerenciamento de estoque, controle de matérias-primas
 
 ## 🎯 Sobre o Projeto
 
-Este sistema foi desenvolvido como teste técnico para a vaga de Desenvolvedor Full Stack Jr. Permite que indústrias gerenciem seu estoque de matérias-primas e produtos acabados, calculem a capacidade de produção com base no estoque disponível e priorizem a produção por valor.
+Este sistema foi desenvolvido como teste técnico e mantido como parte do meu portfólio. Permite que indústrias gerenciem seu estoque de matérias-primas e produtos acabados, calculem a capacidade de produção com base no estoque disponível e priorizem a produção por valor.
 
 ### Requisitos de Negócio
 
